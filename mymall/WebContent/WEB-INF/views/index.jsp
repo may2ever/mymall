@@ -7,6 +7,6 @@
 </head>
 <body>
 	<h1>index</h1>
-	<a href="${pageContext.request.contextPath}/AddMember">회원가입</a>
+	<a href="${pageContext.request.contextPath}/AddMemberController">회원가입</a>
 </body>
 </html>
