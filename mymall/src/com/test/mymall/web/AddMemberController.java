@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.test.mymall.dao.MemberDao;
+import com.test.mymall.vo.Member;
 
 @WebServlet("/AddMemberController")
 public class AddMemberController extends HttpServlet {
@@ -19,10 +20,21 @@ public class AddMemberController extends HttpServlet {
 	private MemberDao memberDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AddMemberController.doGet()");
-		//this.memberDao
+		request.getRequestDispatcher("WEB-INF/views/addMember.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//this.memberDao
+		System.out.println("AddMemberController.doPost()");
+		this.memberDao = new MemberDao();
+		Member member = new Member();
+		String id =  request.getParameter("id");
+		String pw = request.getParameter("pw");
+		int level = Integer.parseInt(request.getParameter("level"));
+		member.setId(id);
+		member.setPw(pw);
+		member.setLevel(level);
+		int row = this.memberDao.insertMember(member);
+		response.sendRedirect(request.getContextPath()+"/IndexController");
+	
 	}
 
 }
