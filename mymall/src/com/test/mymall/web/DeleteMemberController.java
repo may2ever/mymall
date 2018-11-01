@@ -9,22 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.test.mymall.dao.MemberDao;
 import com.test.mymall.service.MemberService;
 import com.test.mymall.vo.Member;
 
-@WebServlet("/GetMemberController")
-public class GetMemberController extends HttpServlet {
-	private MemberService memberService;
+/**
+ * Servlet implementation class DeleteMemberController
+ */
+@WebServlet("/DeleteMemberController")
+public class DeleteMemberController extends HttpServlet {
+	MemberService memberService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {
-			System.out.println("GetMemberController.doGet()");
-			String id = request.getParameter("id");
 			memberService = new MemberService();
-			Member member = memberService.getMember(id);
-			request.setAttribute("member", member);
-			request.getRequestDispatcher("/WEB-INF/views/getMember.jsp").forward(request, response);
+			Member member = (Member)session.getAttribute("loginMember");
+			memberService.removeMember(member.getNo());
+			session.invalidate();
+			response.sendRedirect(request.getContextPath() + "/IndexController");
 		}
+
 	}
 }

@@ -3,6 +3,7 @@ package com.test.mymall.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.test.mymall.commons.DBHelper;
@@ -65,5 +66,11 @@ public class MemberItemDao {
 			DBHelper.close(resultSet, preparedStatement, connection);
 		}
 		return list;
+	}
+	public void deleteMemberItem(Connection connection,int no)  throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM member_item WHERE member_no = ?");
+		preparedStatement.setInt(1, no);
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
 	}
 }

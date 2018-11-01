@@ -27,7 +27,7 @@ public class OrderController extends HttpServlet {
 			int memberNo = member.getNo();
 			MemberItem memberItem = new MemberItem();
 			memberItem.setItem_no(itemNo);
-			memberItem.setMember_no(member.getNo());
+			memberItem.setMember_no(memberNo);
 			memberItemDao.insertMemberItem(memberItem);
 			response.sendRedirect(request.getContextPath() + "/IndexController");
 		}
