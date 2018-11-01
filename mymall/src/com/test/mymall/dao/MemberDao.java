@@ -24,34 +24,26 @@ public class MemberDao {
 		preparedStatement.close();
 	}
 	//id와 pw값을 가지는 member객체를 이용해 로그인체크를 하는 메서드
-	public Member login(Member member) {
+	public Member login(Connection connection, Member member) throws SQLException{
 		//로그인 실패시 -> null 
 		//로그인 성공시 -> 성공한 Member객체
-		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		try {
-			connection = DBHelper.getConnection();
-			preparedStatement = connection.prepareStatement("SELECT no, id, level from member where id = ? and pw = ?");
-			preparedStatement.setString(1, member.getId());
-			preparedStatement.setString(2, member.getPw());
-			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
-				member.setNo(resultSet.getInt(1));
-				member.setId(resultSet.getString(2));
-				member.setLevel(resultSet.getInt(3));
-				member.setPw("");
-			}
-			else {
-				member = null;
-			}
+		preparedStatement = connection.prepareStatement("SELECT no, id, level from member where id = ? and pw = ?");
+		preparedStatement.setString(1, member.getId());
+		preparedStatement.setString(2, member.getPw());
+		resultSet = preparedStatement.executeQuery();
+		if(resultSet.next()) {
+			member.setNo(resultSet.getInt(1));
+			member.setId(resultSet.getString(2));
+			member.setLevel(resultSet.getInt(3));
+			member.setPw("");
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		else {
+			member = null;
 		}
-		finally {
-			DBHelper.close(resultSet,preparedStatement,connection);
-		}		
+		resultSet.close();
+		preparedStatement.close();
 		return member;
 	}
 	/**

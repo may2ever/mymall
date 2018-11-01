@@ -17,7 +17,7 @@ import com.test.mymall.vo.Member;
  */
 @WebServlet("/DeleteMemberController")
 public class DeleteMemberController extends HttpServlet {
-	MemberService memberService;
+	private MemberService memberService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {

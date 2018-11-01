@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.test.mymall.dao.MemberDao;
+import com.test.mymall.service.MemberService;
 import com.test.mymall.vo.Member;
 
 
 @WebServlet("/LoginMemberController")
 public class LoginMemberController extends HttpServlet {
-	private MemberDao memberDao;
+	private MemberService memberService;
 	//로그인 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("LoginMemberController.doGet()");
@@ -30,12 +31,12 @@ public class LoginMemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("LoginMemberController.doPost()");
 		Member member = new Member();
-		memberDao = new MemberDao();
+		memberService = new MemberService();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		member.setId(id);
 		member.setPw(pw);
-		member = memberDao.login(member);
+		member = memberService.loginMember(member);
 		if(member != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", member);

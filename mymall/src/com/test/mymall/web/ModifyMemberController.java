@@ -15,7 +15,7 @@ import com.test.mymall.vo.Member;
 
 @WebServlet("/ModifyMemberController")
 public class ModifyMemberController extends HttpServlet {
-	MemberService memberService;
+	private MemberService memberService;
 	//수정 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ModifyMemberController.doGet()");
