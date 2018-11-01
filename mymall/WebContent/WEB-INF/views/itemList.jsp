@@ -8,7 +8,8 @@
 </head>
 
 <body>
-	<h1>상품목록</h1>
+	<h1>Item List</h1>
+	<!-- 주문하기 item pk, session member pk 넘기기-->
 	<table border="1">
 		<tr>
 			<th>No</th><th>Name</th><th>Price</th><th>Order</th>
@@ -18,7 +19,7 @@
 				<td>${item.no}</td><!--item.getNo()  -->
 				<td>${item.name}</td>
 				<td>${item.price}</td>
-				<td><a href="${pageContext.request.contextPath}/Order">주문</a></td>
+				<td><a href="${pageContext.request.contextPath}/OrderController?itemNo=${item.no}">주문하기</a></td>
 			</tr>
 		</c:forEach>
 		<tr>

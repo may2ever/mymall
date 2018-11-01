@@ -12,4 +12,10 @@
 4. 로그인 폼
 ⓒLogin.doGet-> ⓜlogin.jsp
 5. 로그인 액션
-ⓒLogin.doGet-> ⓜMemberDao.login() -> success:ⓒindex / fail:ⓒlogin 
+ⓒLogin.doGet-> ⓜMemberDao.login() -> success:ⓒindex / fail:ⓒlogin
+
+# 11/1
+1. session 로그인 정보 수정(권한추가)
+2. 주문
+3. 주문 목록(조인)
+4. 

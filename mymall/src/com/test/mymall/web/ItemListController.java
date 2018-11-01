@@ -26,11 +26,11 @@ public class ItemListController extends HttpServlet {
 		int currentScreenPage; //현재 화면에 보이는 페이지의 개수
 		int startScreenPage; //현재 화면에 보이는 페이지의 시작 번호(첫번째화면 1,두번째화면 11..)
 		int lastPage; //마지막 페이지번호
-		this.itemDao = new ItemDao();
+		itemDao = new ItemDao();
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		totalCount = this.itemDao.getTotalItemCount();
+		totalCount = itemDao.getTotalItemCount();
 		lastPage = (int)Math.ceil((double) totalCount / rowPerPage);
 		currentScreen = (int)Math.ceil((double) currentPage / rowPerPage);
 		lastScreen = (int) Math.ceil((double) totalCount / (rowPerPage * pagePerScreen));
@@ -47,7 +47,7 @@ public class ItemListController extends HttpServlet {
 		else {
 			currentScreenPage = pagePerScreen;
 		}
-		ArrayList<Item> itemList = this.itemDao.selectItemList(currentPage, rowPerPage);
+		ArrayList<Item> itemList = itemDao.selectItemList(currentPage, rowPerPage);
 		request.setAttribute("itmeList", itemList);
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("currentPage", currentPage);

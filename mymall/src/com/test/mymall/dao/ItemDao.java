@@ -24,7 +24,7 @@ public class ItemDao {
 		ResultSet resultSet = null;
 		try {
 			connection = DBHelper.getConnection();
-			preparedStatement = connection.prepareStatement("SELECT no, name, price FROM item LIMIT ? , ?");
+			preparedStatement = connection.prepareStatement("SELECT no, name, price FROM item WHERE no NOT IN (SELECT item_no FROM member_item) LIMIT ? , ?");
 			preparedStatement.setInt(1, (currentPage - 1) * rowPerPage);
 			preparedStatement.setInt(2, rowPerPage);
 			resultSet = preparedStatement.executeQuery();
@@ -56,7 +56,7 @@ public class ItemDao {
 		ResultSet resultSet = null;
 		try {
 			connection = DBHelper.getConnection();
-			preparedStatement = connection.prepareStatement("SELECT count(*) FROM item");
+			preparedStatement = connection.prepareStatement("SELECT count(*) FROM item WHERE no NOT IN (SELECT item_no FROM member_item)");
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				totalCount = resultSet.getInt(1);
