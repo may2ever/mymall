@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mymall.dao.MemberItemMapper">
+  <insert id="insertMemberItemList" parameterType="com.test.mymall.vo.MemberItem">
+  	INSERT INTO member_item(member_no, item_no, order_date) VALUES(#{member_no}, #{item_no}, now())
+  </insert>
+  <select id="selectMemberItemList"  resultType="com.test.mymall.vo.MemberItem">
+	
+  </select>
+  <delete id="deleteMemberItemFromNO" parameterType="com.test.mymall.vo.MemberItem">
+	DELETE FROM member_item WHERE no = #{no}
+  </delete>
+     <delete id="deleteMemberItemFromMemberNO" parameterType="com.test.mymall.vo.MemberItem">
+	DELETE FROM member_item WHERE member_no = #{no}
+  </delete>
+  
+</mapper>

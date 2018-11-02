@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.test.mymall.commons.DBHelper;
 import com.test.mymall.dao.MemberItemDao;
 import com.test.mymall.vo.MemberItem;
@@ -11,49 +13,62 @@ import com.test.mymall.vo.MemberItem;
 public class MemberItemService {
 	private MemberItemDao memberItemDao;
 	public void addMemberItem(MemberItem memberItem) {
-		memberItemDao = new MemberItemDao();
-		Connection connection = null;
+		SqlSession sqlSession = null;
 		try {
-			connection = DBHelper.getConnection();
-			memberItemDao.insertMemberItem(connection, memberItem);
+			memberItemDao = new MemberItemDao();
+			sqlSession = DBHelper.getSqlSession()
+			memberItemDao.insertMemberItem(sqlSession, memberItem);
+			sqlSession.commit();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+			try {
+				sqlSession.rollback();
+			}
+			catch(Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		finally {
-			DBHelper.close(null, null, connection);
+			sqlSession.close();
 		}
 		
 	}
 	public ArrayList<HashMap<String, Object>> memberItemList(int memberNO) {
-		Connection connection = null;
+		SqlSession sqlSession = null;
 		ArrayList<HashMap<String, Object>> list = null;
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			memberItemDao = new MemberItemDao();
-			list = memberItemDao.getMemberItemList(connection, memberNO);
+			list = memberItemDao.getMemberItemList(sqlSession, memberNO);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		finally {
-			DBHelper.close(null, null, connection);
+			sqlSession.close();
 		}
 		return list;
 	}
 	public void deleteMemberItem(int memberItemNo) {
-		Connection connection = null;
+		SqlSession sqlSession = null;
 		memberItemDao = new MemberItemDao();
 		try {
-			connection = DBHelper.getConnection();
-			System.out.println(memberItemNo);
-			memberItemDao.deleteMemberItem(connection, memberItemNo, false);
+			sqlSession = DBHelper.getSqlSession();
+			memberItemDao.deleteMemberItem(sqlSession, memberItemNo, false);
+			sqlSession.commit();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+			try {
+				sqlSession.rollback();
+			}
+			catch(Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		finally {
-			DBHelper.close(null, null, connection);
+			sqlSession.close();
 		}
 		
 	}

@@ -3,6 +3,11 @@ package com.test.mymall.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.websocket.Session;
+
+import org.apache.ibatis.session.SqlSession;
+
 import com.test.mymall.commons.DBHelper;
 import com.test.mymall.dao.ItemDao;
 import com.test.mymall.vo.Item;
@@ -16,13 +21,13 @@ public class ItemService {
 		int currentScreenPage; //현재 화면에 보이는 페이지의 개수
 		int startScreenPage; //현재 화면에 보이는 페이지의 시작 번호(첫번째화면 1,두번째화면 11..)
 		int lastPage; //마지막 페이지번호
-		Connection connection = null;
 		ArrayList<Item> itemList = null;
+		SqlSession sqlSession = null;
 		itemDao = new ItemDao();
 		try {
-			connection = DBHelper.getConnection();
-			itemList = itemDao.selectItemList(connection, currentPage, rowPerPage);
-			totalCount = itemDao.getTotalItemCount(connection);
+			sqlSession = DBHelper.getSqlSession();
+			itemList = (ArrayList<Item>)itemDao.selectItemList(sqlSession, currentPage, rowPerPage);
+			totalCount = itemDao.getTotalItemCount(sqlSession);
 			lastPage = (int)Math.ceil((double) totalCount / rowPerPage);
 			currentScreen = (int)Math.ceil((double) currentPage / pagePerScreen);
 			lastScreen = (int) Math.ceil((double) totalCount / (rowPerPage * pagePerScreen));
@@ -51,7 +56,7 @@ public class ItemService {
 			e.printStackTrace();
 		}
 		finally {
-			DBHelper.close(null, null, connection);
+			sqlSession.close();
 		}
 
 		return itemList;
