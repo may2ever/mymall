@@ -41,4 +41,20 @@ public class MemberItemService {
 		}
 		return list;
 	}
+	public void deleteMemberItem(int memberItemNo) {
+		Connection connection = null;
+		memberItemDao = new MemberItemDao();
+		try {
+			connection = DBHelper.getConnection();
+			System.out.println(memberItemNo);
+			memberItemDao.deleteMemberItem(connection, memberItemNo, false);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			DBHelper.close(null, null, connection);
+		}
+		
+	}
 }

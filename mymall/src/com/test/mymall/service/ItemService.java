@@ -24,7 +24,7 @@ public class ItemService {
 			itemList = itemDao.selectItemList(connection, currentPage, rowPerPage);
 			totalCount = itemDao.getTotalItemCount(connection);
 			lastPage = (int)Math.ceil((double) totalCount / rowPerPage);
-			currentScreen = (int)Math.ceil((double) currentPage / rowPerPage);
+			currentScreen = (int)Math.ceil((double) currentPage / pagePerScreen);
 			lastScreen = (int) Math.ceil((double) totalCount / (rowPerPage * pagePerScreen));
 			startScreenPage = (currentScreen - 1) * pagePerScreen;
 			if(currentScreen == lastScreen) {

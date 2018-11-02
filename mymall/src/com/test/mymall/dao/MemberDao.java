@@ -86,7 +86,12 @@ public class MemberDao {
 		preparedStatement.close();
 
 	}
-	// 회원탈퇴
+    /**
+     * 현재 로그인되어있는 회원의 정보를 데이터베이스에서 삭제
+     *
+     * @param	데이터베이스 연결에 필요한 객체
+     * @return  없음
+     */
 	public void deleteMember(Connection connection, int no) throws SQLException {
 		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM member WHERE no = ?");
 		preparedStatement.setInt(1, no);

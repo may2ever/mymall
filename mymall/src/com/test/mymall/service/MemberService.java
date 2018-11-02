@@ -18,7 +18,7 @@ public class MemberService {
 			connection.setAutoCommit(false); //자동커밋 방지
 			memberItemDao = new MemberItemDao();
 			memberDao = new MemberDao();
-			memberItemDao.deleteMemberItem(connection,no);
+			memberItemDao.deleteMemberItem(connection, no, true);
 			memberDao.deleteMember(connection,no);
 			connection.commit();
 		}
@@ -70,17 +70,10 @@ public class MemberService {
 		memberDao = new MemberDao();
 		try {
 			connection = DBHelper.getConnection();
-			connection.setAutoCommit(false);
 			memberDao.modifyMember(connection, member);
-			connection.commit();
 		}
 		catch(Exception e) {
-			try {
-				connection.rollback();
-			}
-			catch(SQLException e1) {
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		finally {
 			DBHelper.close(null, null, connection);

@@ -27,7 +27,7 @@
 					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${(pagingInfo.currentScreen - 1) * pagingInfo.pagePerScreen}"><<</a>
 				</c:if>
 				<c:if test="${pagingInfo.currentPage > 1}">
-					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${currentPage - 1}"><</a>
+					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${pagingInfo.currentPage - 1}"><</a>
 				</c:if>
 				<c:forEach var="i" begin="${pagingInfo.startScreenPage + 1}" end="${pagingInfo.startScreenPage + pagingInfo.currentScreenPage}" step="1">
 					<c:if test="${pagingInfo.currentPage == i}">

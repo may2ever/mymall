@@ -50,8 +50,23 @@ public class MemberItemDao {
 		preparedStatement.close();
 		return list;
 	}
-	public void deleteMemberItem(Connection connection,int no)  throws SQLException {
-		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM member_item WHERE member_no = ?");
+	/**
+	 * 회원번호 or 주문번호에 따라 주문목록의 데이터를 데이터베이스에서 삭제
+	 * 
+	 * @param 데이터베이스 연결을 위한 객체
+	 * @param 회원번호 or 주문번호
+	 * @param 두번째 매개변수가 회원번호인경우 true
+	 * @return 없음
+	 */
+	public void deleteMemberItem(Connection connection, int no, boolean isMemberNo)  throws SQLException {
+		String query;
+		if(isMemberNo) {
+			query = "DELETE FROM member_item WHERE member_no = ?";
+		}
+		else {
+			query = "DELETE FROM member_item WHERE no = ?";
+		}
+		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, no);
 		preparedStatement.executeUpdate();
 		preparedStatement.close();

@@ -15,6 +15,7 @@
 		<th>Name</th>
 		<th>Price</th>
 		<th>OrderDate</th>
+		<th>취소</th>
 	</tr>
 	<c:forEach var = "list" items="${memberItemList}">
 		<tr>		
@@ -23,6 +24,7 @@
 			<td>${list.itemName}</td>
 			<td>${list.itemPrice}</td>
 			<td>${list.orderDate}</td>
+			<td><a href="CancelOrderController?memberItemNo=${list.memberItemNo}">취소</a></td>
 		</tr>	
 	</c:forEach>
 	<tr>
