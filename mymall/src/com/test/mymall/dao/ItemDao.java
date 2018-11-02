@@ -1,6 +1,5 @@
 package com.test.mymall.dao;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -25,7 +24,7 @@ public class ItemDao {
 	 * 
 	 * @return 물품의 총 개수
 	 */
-	public int getTotalItemCount(SqlSession sqlSession) throws SQLException{
+	public int getTotalItemCount(SqlSession sqlSession) {
 		return sqlSession.selectOne("com.test.mymall.dao.ItemMapper.totalItemCount");
 	}
 }

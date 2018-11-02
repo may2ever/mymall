@@ -1,13 +1,7 @@
 package com.test.mymall.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
-
-import com.test.mymall.commons.DBHelper;
 import com.test.mymall.vo.Member;
 
 public class MemberDao {
@@ -16,11 +10,11 @@ public class MemberDao {
 	 * 
 	 * @param Member 폼에서 입력한 멤버의 정보(id,pw,level)
 	 */
-	public void insertMember(SqlSession sqlSession, Member member) throws SQLException{
+	public void insertMember(SqlSession sqlSession, Member member) {
 		sqlSession.insert("com.test.mymall.dao.MemberMapper.insertMember", member);
 	}
 	//id와 pw값을 가지는 member객체를 이용해 로그인체크를 하는 메서드
-	public Member login(SqlSession sqlSession, Member member) throws SQLException{
+	public Member login(SqlSession sqlSession, Member member) {
 		return sqlSession.selectOne("com.test.mymall.dao.MemberMapper.loginMember",member);
 	}
 	/**
@@ -29,7 +23,7 @@ public class MemberDao {
 	 * @param	id	로그인된 회원의 id
 	 * @return	회원의정보(no,id,pw,level)
 	 */
-	public Member selectMember(SqlSession sqlSession,String id) throws SQLException{
+	public Member selectMember(SqlSession sqlSession, String id) {
 		return sqlSession.selectOne("com.test.mymall.dao.MemberMapper.selectMember", id);
 	}
     /**
@@ -38,7 +32,7 @@ public class MemberDao {
      * @param   member   로그인한 회원의 수정된 데이터(pw,level)
      * @return  없음
      */
-	public void modifyMember(SqlSession sqlSession,Member member) throws SQLException{
+	public void modifyMember(SqlSession sqlSession, Member member) {
 		sqlSession.update("com.test.mymall.dao.MemberMapper.modifyMember", member);
 	}
     /**
@@ -47,7 +41,7 @@ public class MemberDao {
      * @param	데이터베이스 연결에 필요한 객체
      * @return  없음
      */
-	public void deleteMember(SqlSession sqlSession, int no) throws SQLException {
+	public void deleteMember(SqlSession sqlSession, int no) {
 		sqlSession.delete("com.test.mymall.dao.MemberMapper.deleteMember",no);
 	}
 	

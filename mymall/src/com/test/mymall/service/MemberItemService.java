@@ -1,11 +1,8 @@
 package com.test.mymall.service;
 
-import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-
 import com.test.mymall.commons.DBHelper;
 import com.test.mymall.dao.MemberItemDao;
 import com.test.mymall.vo.MemberItem;
@@ -16,7 +13,7 @@ public class MemberItemService {
 		SqlSession sqlSession = null;
 		try {
 			memberItemDao = new MemberItemDao();
-			sqlSession = DBHelper.getSqlSession()
+			sqlSession = DBHelper.getSqlSession();
 			memberItemDao.insertMemberItem(sqlSession, memberItem);
 			sqlSession.commit();
 		}
@@ -34,9 +31,9 @@ public class MemberItemService {
 		}
 		
 	}
-	public ArrayList<HashMap<String, Object>> memberItemList(int memberNO) {
+	public List<HashMap<String, Object>> memberItemList(int memberNO) {
 		SqlSession sqlSession = null;
-		ArrayList<HashMap<String, Object>> list = null;
+		List<HashMap<String, Object>> list = null;
 		try {
 			sqlSession = DBHelper.getSqlSession();
 			memberItemDao = new MemberItemDao();

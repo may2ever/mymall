@@ -1,13 +1,9 @@
 package com.test.mymall.service;
 
-import java.sql.Connection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.websocket.Session;
-
 import org.apache.ibatis.session.SqlSession;
-
 import com.test.mymall.commons.DBHelper;
 import com.test.mymall.dao.ItemDao;
 import com.test.mymall.vo.Item;

@@ -19,12 +19,12 @@
 	</tr>
 	<c:forEach var = "list" items="${memberItemList}">
 		<tr>		
-			<td>${list.memberItemNo}</td>
-			<td>${list.itemNO}</td>
-			<td>${list.itemName}</td>
-			<td>${list.itemPrice}</td>
-			<td>${list.orderDate}</td>
-			<td><a href="CancelOrderController?memberItemNo=${list.memberItemNo}">취소</a></td>
+			<td>${list.no}</td>
+			<td>${list.item_no}</td>
+			<td>${list.name}</td>
+			<td>${list.price}</td>
+			<td>${list.order_date}</td>
+			<td><a href="CancelOrderController?memberItemNo=${list.no}">취소</a></td>
 		</tr>	
 	</c:forEach>
 	<tr>
