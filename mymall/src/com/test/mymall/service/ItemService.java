@@ -24,10 +24,10 @@ public class ItemService {
 			sqlSession = DBHelper.getSqlSession();
 			itemList = (ArrayList<Item>)itemDao.selectItemList(sqlSession, currentPage, rowPerPage);
 			totalCount = itemDao.getTotalItemCount(sqlSession);
-			lastPage = (int)Math.ceil((double) totalCount / rowPerPage);
-			currentScreen = (int)Math.ceil((double) currentPage / pagePerScreen);
-			lastScreen = (int) Math.ceil((double) totalCount / (rowPerPage * pagePerScreen));
-			startScreenPage = (currentScreen - 1) * pagePerScreen;
+			lastPage = (int)Math.ceil((double)totalCount / rowPerPage);
+			currentScreen = (int)Math.ceil((double)currentPage / pagePerScreen);
+			lastScreen = (int) Math.ceil((double)totalCount / (rowPerPage * pagePerScreen));
+			startScreenPage = (currentScreen - 1) * pagePerScreen + 1;
 			if(currentScreen == lastScreen) {
 				if(totalCount % (rowPerPage * pagePerScreen) != 0) { //마지막 화면에 보이는 리스트 개수(rowPerPage * pagePerScreen)가 100개이면 totalCount % (rowPerPage * pagePerScreen)은 0이 되기때문에 pagePerScreen 값을 넣어주어야 한다
 					int temp = totalCount % (rowPerPage * pagePerScreen);
@@ -54,7 +54,6 @@ public class ItemService {
 		finally {
 			sqlSession.close();
 		}
-
 		return itemList;
 	}
 }

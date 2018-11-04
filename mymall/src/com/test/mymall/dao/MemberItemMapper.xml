@@ -6,8 +6,11 @@
   <insert id="insertMemberItemList" parameterType="com.test.mymall.vo.MemberItem">
   	INSERT INTO member_item(member_no, item_no, order_date) VALUES(#{member_no}, #{item_no}, now())
   </insert>
-  <select id="selectMemberItemList"  resultType="HashMap">
+  <select id="selectMemberItemList"  resultType="HashMap" parameterType="int">
 	SELECT mi.no, mi.item_no, i.name, i.price, mi.order_date FROM member_item mi inner join item i ON mi.item_no = i.no WHERE mi.member_no = #{memberNO}
+  </select>
+  <select id="selectTotalMemberItemList"  resultType="HashMap">
+	SELECT mi.no, mi.item_no, i.name, i.price, mi.order_date FROM member_item mi inner join item i ON mi.item_no = i.no
   </select>
   <delete id="deleteMemberItemFromNO" parameterType="int">
 	DELETE FROM member_item WHERE no = #{no}

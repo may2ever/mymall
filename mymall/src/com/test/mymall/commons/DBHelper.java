@@ -8,17 +8,20 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class DBHelper {
-	public static SqlSession getSqlSession() {
-		InputStream inputStream = null;
-		try {
+	private DBHelper() {}
+	private static SqlSessionFactory sqlSessionFactory;
+	private static SqlSessionFactory getSqlSessionFactory() throws IOException{
+		if(sqlSessionFactory == null) {
+			System.out.println("sqlSessionFactory == null");
 			String resource = "mybatis-config.xml";
-			inputStream = Resources.getResourceAsStream(resource);
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
+			InputStream inputStream = Resources.getResourceAsStream(resource);
+			return new SqlSessionFactoryBuilder().build(inputStream);
 		}
-		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		return sqlSessionFactory;
+	}
+	public static SqlSession getSqlSession() throws IOException{
+		sqlSessionFactory = getSqlSessionFactory();
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		return sqlSession;
-		}
+	}
 }

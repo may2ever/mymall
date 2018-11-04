@@ -24,6 +24,9 @@ public class MemberItemDao {
 	public List<HashMap<String, Object>> getMemberItemList(SqlSession sqlSession, int memberNO) {
 		return sqlSession.selectList("com.test.mymall.dao.MemberItemMapper.selectMemberItemList",memberNO);
 	}
+	public List<HashMap<String, Object>> getTotalMemberItemList(SqlSession sqlSession) {
+		return sqlSession.selectList("com.test.mymall.dao.MemberItemMapper.selectTotalMemberItemList");
+	}
 	/**
 	 * 회원번호 or 주문번호에 따라 주문목록의 데이터를 데이터베이스에서 삭제
 	 * 

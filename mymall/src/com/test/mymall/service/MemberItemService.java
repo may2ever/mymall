@@ -47,6 +47,22 @@ public class MemberItemService {
 		}
 		return list;
 	}
+	public List<HashMap<String, Object>> totalMemberItemList() {
+		SqlSession sqlSession = null;
+		List<HashMap<String, Object>> list = null;
+		try {
+			sqlSession = DBHelper.getSqlSession();
+			memberItemDao = new MemberItemDao();
+			list = memberItemDao.getTotalMemberItemList(sqlSession);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 	public void deleteMemberItem(int memberItemNo) {
 		SqlSession sqlSession = null;
 		memberItemDao = new MemberItemDao();

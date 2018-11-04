@@ -15,7 +15,6 @@ import com.test.mymall.vo.Item;
 @WebServlet("/ItemListController")
 public class ItemListController extends HttpServlet {
 	private ItemService itemService;
-	private ItemDao itemDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		System.out.println("ItemListController.doGet()");
 		int currentPage = 1;

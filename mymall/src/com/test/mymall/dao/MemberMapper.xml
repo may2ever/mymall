@@ -18,5 +18,5 @@
   <delete id="deleteMember" parameterType="int">
 	DELETE FROM member WHERE no = #{no}
   </delete>
-
+	
 </mapper>

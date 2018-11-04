@@ -82,7 +82,7 @@ public class MemberService {
 			loginmember = memberDao.login(sqlSession, member);
 		}
 		catch(Exception e) {
-			sqlSession.rollback();
+			e.printStackTrace();
 		}
 		finally {
 			sqlSession.close();
