@@ -23,26 +23,21 @@
 		</c:forEach>
 		<tr>
 			<td colspan = "4" align="center">
-				<c:if test="${pagingInfo.currentScreen > 1}">
-					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${(pagingInfo.currentScreen - 1) * pagingInfo.pagePerScreen}"><<</a>
+				<c:if test="${pageMaker.prevPage}">
+					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${(pageMaker.currentBlock - 1) * pageMaker.pagePerBlock}"><</a>
 				</c:if>
-				<c:if test="${pagingInfo.currentPage > 1}">
-					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${pagingInfo.currentPage - 1}"><</a>
-				</c:if>
-				<c:forEach var="i" begin="${pagingInfo.startScreenPage}" end="${pagingInfo.startScreenPage + pagingInfo.currentScreenPage - 1}" step="1">
-					<c:if test="${pagingInfo.currentPage == i}">
+				<c:forEach var="i" begin="${pageMaker.startPage}" end="${pageMaker.endPage}" step="1">
+					<c:if test="${pageMaker.pageNum == i}">
 						${i}
 					</c:if>
-					<c:if test="${pagingInfo.currentPage != i}">
+					<c:if test="${pageMaker.pageNum != i}">
 						<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${i}">${i}</a>
 					</c:if>
 				</c:forEach>
-				<c:if test="${pagingInfo.currentPage < pagingInfo.lastPage}">
-					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${pagingInfo.currentPage + 1}">></a>
+				<c:if test="${pageMaker.nextPage}">
+					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${pageMaker.currentBlock * pageMaker.pagePerBlock + 1}">></a>
 				</c:if>
-				<c:if test="${pagingInfo.currentScreen < pagingInfo.lastScreen}">
-					<a href="${pageContext.request.contextPath}/ItemListController?currentPage=${pagingInfo.currentScreen * pagingInfo.pagePerScreen + 1}">>></a>
-				</c:if>
+
 			</td>
 		</tr>
 	</table>
